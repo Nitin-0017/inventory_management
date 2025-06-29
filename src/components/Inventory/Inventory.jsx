@@ -1,168 +1,198 @@
 import React, { useState } from "react";
 import Navbar from "../Navbar/Nav.jsx";
-import Sidebar from "../SlideBar/SlideBar";
-import './Inventory.css';
+import Sidebar from "../SlideBar/SlideBar.jsx";
+import "./Inventory.css";
 
-// ✅ Distinct product names
-const productNames = [
-  "Maggi", "Pepsi", "Coca Cola", "Red Bull", "Bourn Vita", "Horlicks", "Ariel", "Harpic", "Fanta", "Sprite",
-  "Tide", "Lux Soap", "Pears", "Dettol", "Dove", "Clinic Plus", "Nestle", "Parle-G", "Good Day", "Unibic",
-  "Lays", "Kurkure", "Bingo", "Monster", "7UP", "Appy Fizz", "Nescafe", "Bru", "Sunfeast", "Real Juice",
-  "Complan", "Boost", "Oreo", "Hide & Seek", "Kinder Joy", "Perk", "Munch", "KitKat", "Amul Milk", "Mother Dairy",
-  "Danone", "Yakult", "Bisleri", "Aquafina", "Kinley", "Mirinda", "Limca", "Slice", "Minute Maid", "Paper Boat"
-];
-
-// ✅ Generate 100 unique inventory items
-const rawData = Array.from({ length: 100 }, (_, i) => {
-  const name = productNames[i % productNames.length] + ` ${Math.floor(i / productNames.length) + 1}`;
-  return {
-    name,
-    price: `₹${200 + i * 3}`,
-    quantity: `${10 + (i % 30)} Packets`,
-    threshold: `${5 + (i % 5)} Packets`,
-    expiry: `${(i % 28) + 1}/12/25`,
-    status: i % 10 === 0 ? "Low stock" : i % 7 === 0 ? "Out of stock" : "In-stock"
-  };
-});
+// Sample product data (10+ items for pagination)
+const initialProductData = Array.from({ length: 30 }, (_, i) => ({
+  id: i + 1,
+  name: `Product ${i + 1}`,
+  category: i % 2 === 0 ? "Electronics" : "Clothing",
+  quantity: Math.floor(Math.random() * 100),
+  status: i % 3 === 0 ? "Low Stock" : i % 3 === 1 ? "In Stock" : "Out of Stock",
+}));
 
 const Inventory = () => {
-  const [page, setPage] = useState(1);
-  const [filterStatus, setFilterStatus] = useState("All");
-  const perPage = 10;
+  const [products, setProducts] = useState(initialProductData);
+  const [filter, setFilter] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
 
-  const filteredData =
-    filterStatus === "All"
-      ? rawData
-      : rawData.filter((item) => item.status === filterStatus);
+  const [showModal, setShowModal] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    name: "",
+    category: "",
+    quantity: "",
+    status: "In Stock",
+  });
 
-  const paginatedData = filteredData.slice((page - 1) * perPage, page * perPage);
-  const totalPages = Math.ceil(filteredData.length / perPage);
+  const handleAddProduct = () => {
+  if (!newProduct.name || !newProduct.category || !newProduct.quantity) {
+    alert("Please fill all fields");
+    return;
+  }
 
-  const handleFilterChange = (e) => {
-    setFilterStatus(e.target.value);
-    setPage(1); // reset to first page on filter change
+  const newEntry = {
+    id: products.length + 1,
+    ...newProduct,
   };
+
+  setProducts([...products, newEntry]); // Add to end
+  setNewProduct({ name: "", category: "", quantity: "", status: "In Stock" });
+  setShowModal(false);
+
+  // Move to last page
+  setCurrentPage(Math.ceil((products.length + 1) / productsPerPage));
+};
+
+  const filteredProducts =
+    filter === "All"
+      ? products
+      : products.filter((product) => product.status === filter);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const paginatedProducts = filteredProducts.slice(
+    startIndex,
+    startIndex + productsPerPage
+  );
 
   return (
     <div className="inventory-wrapper">
       <Sidebar />
-
       <div className="inventory-content">
         <Navbar />
         <main className="inventory-main">
+         
 
-          {/* --- Overview Section --- */}
-          <div className="card inventory-summary">
-            <div className="summary-box">
-              <p className="summary-title blue">Categories</p>
-              <h2>14</h2>
-              <p className="summary-subtext">Last 7 days</p>
+          {/* Summary Boxes */}
+          <div className="inventory-summary">
+            <div className="summary-box blue">
+              <div className="summary-title">Total Products</div>
+              <div className="summary-subtext">{products.length}</div>
             </div>
-            <div className="summary-box">
-              <p className="summary-title orange">Total Products</p>
-              <h2>868</h2>
-              <p className="summary-subtext">₹25000 Revenue</p>
+            <div className="summary-box orange">
+              <div className="summary-title">Low Stock</div>
+              <div className="summary-subtext">
+                {products.filter((p) => p.status === "Low Stock").length}
+              </div>
             </div>
-            <div className="summary-box">
-              <p className="summary-title purple">Top Selling</p>
-              <h2>5</h2>
-              <p className="summary-subtext">₹2500 Cost</p>
+            <div className="summary-box purple">
+              <div className="summary-title">In Stock</div>
+              <div className="summary-subtext">
+                {products.filter((p) => p.status === "In Stock").length}
+              </div>
             </div>
-            <div className="summary-box">
-              <p className="summary-title red">Low Stocks</p>
-              <h2>12</h2>
-              <p className="summary-subtext">2 Not in stock</p>
+            <div className="summary-box red">
+              <div className="summary-title">Out of Stock</div>
+              <div className="summary-subtext">
+                {products.filter((p) => p.status === "Out of Stock").length}
+              </div>
             </div>
           </div>
 
-          {/* --- Product Table --- */}
-          <div className="card product-table">
+          {/* Product Table */}
+          <div className="product-table">
             <div className="table-header">
-              <h3>Products</h3>
-              <div className="table-buttons">
-                <button className="btn blue">Add Product</button>
-
-                <select
-                  value={filterStatus}
-                  onChange={handleFilterChange}
-                  className="btn filter-dropdown"
-                >
-                  <option value="All">All</option>
-                  <option value="In-stock">In-stock</option>
-                  <option value="Out of stock">Out of stock</option>
-                  <option value="Low stock">Low stock</option>
-                </select>
-
-                <button className="btn">Download all</button>
-              </div>
+              <button className="btn blue" onClick={() => setShowModal(true)}>
+                + Add Product
+              </button>
+              <select
+                className="filter-dropdown"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="In Stock">In Stock</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+              </select>
             </div>
 
             <table>
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Product Name</th>
-                  <th>Buying Price</th>
+                  <th>Category</th>
                   <th>Quantity</th>
-                  <th>Threshold Value</th>
-                  <th>Expiry Date</th>
-                  <th>Availability</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                {paginatedData.length === 0 ? (
-                  <tr>
-                    <td colSpan="6">No products found.</td>
+                {paginatedProducts.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.category}</td>
+                    <td>{product.quantity}</td>
+                    <td className={product.status === "In Stock" ? "green" : product.status === "Low Stock" ? "orange" : "red"}>
+                      {product.status}
+                    </td>
                   </tr>
-                ) : (
-                  paginatedData.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.name}</td>
-                      <td>{item.price}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.threshold}</td>
-                      <td>{item.expiry}</td>
-                      <td className={
-                        item.status === "In-stock"
-                          ? "green"
-                          : item.status === "Out of stock"
-                          ? "red"
-                          : "orange"
-                      }>
-                        {item.status}
-                      </td>
-                    </tr>
-                  ))
-                )}
+                ))}
               </tbody>
             </table>
 
-            {/* --- Pagination --- */}
             <div className="pagination">
-              {totalPages > 1 && (
-                <>
-                  <button
-                    disabled={page === 1}
-                    onClick={() => setPage(page - 1)}
-                    className="btn"
-                  >
-                    Previous
-                  </button>
-
-                  <span>Page {page} of {totalPages}</span>
-
-                  <button
-                    disabled={page === totalPages}
-                    onClick={() => setPage(page + 1)}
-                    className="btn"
-                  >
-                    Next
-                  </button>
-                </>
-              )}
+              <button
+                className="btn"
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                Previous
+              </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button
+                className="btn"
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                Next
+              </button>
             </div>
           </div>
         </main>
       </div>
+
+      {/* Add Product Modal */}
+      {showModal && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <h2>Add Product</h2>
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={newProduct.name}
+              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="Category"
+              value={newProduct.category}
+              onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+            />
+            <input
+              type="number"
+              placeholder="Quantity"
+              value={newProduct.quantity}
+              onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
+            />
+            <select
+              value={newProduct.status}
+              onChange={(e) => setNewProduct({ ...newProduct, status: e.target.value })}
+            >
+              <option value="In Stock">In Stock</option>
+              <option value="Low Stock">Low Stock</option>
+              <option value="Out of Stock">Out of Stock</option>
+            </select>
+            <div className="modal-actions">
+              <button className="btn" onClick={() => setShowModal(false)}>Cancel</button>
+              <button className="btn blue" onClick={handleAddProduct}>Add</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
