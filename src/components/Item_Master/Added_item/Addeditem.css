@@ -1,0 +1,83 @@
+.added-wrapper {
+    display: flex;
+  }
+  
+  .added-content {
+    flex: 1;
+    margin-left: 16rem;
+  }
+  
+  .added-main {
+    padding: 2rem;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+  }
+  
+  .table-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  
+  /* Column toggle */
+  .column-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+  }
+  .column-toggle:hover {
+    background-color: #f3f4f6;
+  }
+  .column-checkbox {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #2563eb;
+  }
+  
+  /* Status Labels */
+  .status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .status.expired {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  .status.warning {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  .status.valid {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  /* Action Buttons */
+  .table-action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .edit-btn {
+    color: #2563eb;
+  }
+  .edit-btn:hover {
+    color: #1e40af;
+  }
+  .delete-btn {
+    color: #dc2626;
+  }
+  .delete-btn:hover {
+    color: #991b1b;
+  }

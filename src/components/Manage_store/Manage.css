@@ -1,0 +1,21 @@
+.manage-store {
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 16rem; /* same as ml-64 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f9fafb; /* same as bg-gray-50 */
+  }
+  
+  .content-area {
+    flex: 1;
+    padding: 2rem; /* same as p-8 */
+  }

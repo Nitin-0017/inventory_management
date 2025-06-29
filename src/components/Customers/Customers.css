@@ -1,0 +1,20 @@
+.customers-wrapper {
+  display: flex;
+}
+
+.customers-content {
+  margin-left: 16rem; /* ml-64 */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #0f0f0f; /* dark black */
+  color: #f1f1f1; /* light text for contrast */
+}
+
+.customers-main {
+  flex: 1;
+  padding: 2rem; /* p-8 */
+  background-color: #121212; /* slightly lighter black for content */
+  color: #e0e0e0; /* high contrast text */
+}

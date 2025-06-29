@@ -1,0 +1,183 @@
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dashboard-content {
+  flex: 1;
+  margin-left: 16rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #f9fafb;
+}
+
+.section-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Large cards */
+.section-card {
+  flex: 1 1 48%;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.section-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 1.8rem;
+  color: #6366f1;
+}
+
+/* Metric row with icons */
+.card-metrics {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.metric-box {
+  flex: 1 1 22%;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 130px;
+}
+
+.metric-icon {
+  font-size: 1.8rem;
+  color: #3b82f6;
+  background-color: #e0e7ff;
+  padding: 0.6rem;
+  border-radius: 50%;
+}
+
+.metric-box h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.metric-box p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Small cards */
+.section-small-card {
+  flex: 1 1 22%;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.section-small-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.section-small-card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-bottom: 0.4rem;
+}
+
+/* Graph boxes */
+.section-graph {
+  flex: 1 1 48%;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.section-graph h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.section-graph img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  padding: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-row {
+    flex-direction: column;
+  }
+
+  .section-card,
+  .section-small-card,
+  .section-graph {
+    flex: 1 1 100%;
+  }
+}
+/* ... keep everything else same ... */
+
+.section-top-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.metric-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 0.25rem;
+}
+
+/* Keep rest of your CSS same as shared earlier */

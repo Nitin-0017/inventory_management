@@ -1,0 +1,92 @@
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f3f4f6;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 28rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .search-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #6b7280;
+    margin-right: 0.5rem;
+  }
+  
+  .search-input {
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.875rem;
+    color: #1f2937;
+    ::placeholder {
+      color: #6b7280;
+    }
+  }
+  
+  .right-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  
+  .notification-btn {
+    position: relative;
+    color: #4b5563;
+    transition: color 0.2s;
+  }
+  
+  .notification-btn:hover {
+    color: #2563eb;
+  }
+  
+  .bell-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .notification-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -0.25rem;
+    margin-right: -0.25rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    background-color: #ef4444;
+    border-radius: 9999px;
+    border: 2px solid white;
+  }
+  
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .avatar:hover {
+    transform: scale(1.05);
+  }
