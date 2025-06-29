@@ -1,181 +1,176 @@
 .dashboard-wrapper {
   display: flex;
   min-height: 100vh;
-  background-color: #f4f6f8;
-  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafb;
 }
 
 .dashboard-content {
   flex: 1;
-  margin-left: 16rem;
   display: flex;
   flex-direction: column;
+  margin-left: 16rem;
 }
 
 .dashboard-main {
+  flex: 1;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background-color: #f9fafb;
 }
 
-.section-row {
+.dashboard-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-/* Large cards */
+.dashboard-row .section-card {
+  flex: 1 1 calc(50% - 1rem);
+}
+
+.chart-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.chart-card {
+  flex: 1 1 calc(50% - 1rem);
+}
+
+.chart-wrapper img {
+  width: 100%;
+  border-radius: 8px;
+  background-color: #f3f4f6;
+  padding: 0.5rem;
+}
+
 .section-card {
-  flex: 1 1 48%;
   background-color: #ffffff;
-  border-radius: 14px;
-  padding: 1.5rem 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.section-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #1f2937;
-  font-weight: 600;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .card-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
 }
 
-.icon {
-  font-size: 1.8rem;
-  color: #6366f1;
+.card-header h3 {
+  font-size: 1.5rem;
+  color: #111827;
+  margin: 0;
 }
 
-/* Metric row with icons */
 .card-metrics {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 1rem;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
 }
 
 .metric-box {
-  flex: 1 1 22%;
-  background-color: #f9fafb;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-width: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  min-width: 130px;
+  padding: 1rem 0;
+  border-right: 1px solid #e5e7eb;
+}
+
+.metric-box:last-child {
+  border-right: none;
 }
 
 .metric-icon {
-  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-box.blue .metric-icon {
+  background-color: #e0edff;
+}
+
+.metric-box.purple .metric-icon {
+  background-color: #eee8fd;
+}
+
+.metric-box.orange .metric-icon {
+  background-color: #fff4e5;
+}
+
+.metric-box.green .metric-icon {
+  background-color: #e5fbe8;
+}
+
+.metric-icon-symbol {
+  font-size: 20px;
   color: #3b82f6;
-  background-color: #e0e7ff;
-  padding: 0.6rem;
-  border-radius: 50%;
+}
+
+.metric-box.purple .metric-icon-symbol {
+  color: #a855f7;
+}
+
+.metric-box.orange .metric-icon-symbol {
+  color: #f59e0b;
+}
+
+.metric-box.green .metric-icon-symbol {
+  color: #10b981;
 }
 
 .metric-box h4 {
   margin: 0;
   font-size: 1.1rem;
-  color: #1f2937;
+  color: #111827;
   font-weight: 600;
 }
 
 .metric-box p {
-  margin: 0;
-  font-size: 0.85rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
   color: #6b7280;
 }
 
-/* Small cards */
-.section-small-card {
-  flex: 1 1 22%;
-  background-color: #ffffff;
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.section-small-card h4 {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: #1f2937;
-  font-weight: 600;
-}
-
-.section-small-card p {
-  font-size: 0.9rem;
-  color: #4b5563;
-  margin-bottom: 0.4rem;
-}
-
-/* Graph boxes */
-.section-graph {
-  flex: 1 1 48%;
-  background-color: #ffffff;
-  border-radius: 14px;
-  padding: 1.5rem 1.5rem 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-.section-graph h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.section-graph img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  background-color: #f3f4f6;
-  padding: 0.5rem;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .section-row {
+  .dashboard-row .section-card,
+  .chart-row .chart-card {
+    flex: 1 1 100%;
+  }
+
+  .card-metrics {
     flex-direction: column;
   }
 
-  .section-card,
-  .section-small-card,
-  .section-graph {
-    flex: 1 1 100%;
+  .metric-box {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .metric-box:last-child {
+    border-bottom: none;
   }
 }
-/* ... keep everything else same ... */
 
-.section-top-image {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.dashboard-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
-.card-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.metric-img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  margin-bottom: 0.25rem;
+.dashboard-row .section-card {
+  flex: 1;
+  min-width: 350px;
 }
