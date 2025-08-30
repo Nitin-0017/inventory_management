@@ -3,7 +3,7 @@ import { TabulatorFull as Tabulator } from "tabulator-tables";
 import "tabulator-tables/dist/css/tabulator.min.css";
 import dayjs from "dayjs";
 import Sidebar from "../../SlideBar/SlideBar";
-import Navbar from "../../navBar/nav";
+import Navbar from "../../Navbar/Nav";
 import "./Addeditem.css";
 
 const Added_Items = () => {

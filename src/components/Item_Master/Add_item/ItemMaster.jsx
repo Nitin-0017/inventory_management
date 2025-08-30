@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../SlideBar/SlideBar";
-import Navbar from "../../navBar/nav";
+import Navbar from "../../Navbar/Nav";
 import "./ItemMaster.css";
 
 const initialFormState = {

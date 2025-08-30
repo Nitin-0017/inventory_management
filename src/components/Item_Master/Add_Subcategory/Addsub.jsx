@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
-import Navbar from "../../navBar/nav";
+import Navbar from "../../Navbar/Nav";
 import Sidebar from "../../SlideBar/SlideBar";
 import "./Addsub.css";
 
