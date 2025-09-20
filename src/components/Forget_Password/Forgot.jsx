@@ -20,7 +20,9 @@ const Forgot = () => {
       alert(`Your password is: ${user.password}`);
       navigate("/"); // redirect to login after showing password
     } else {
-      alert("Email not found. Please sign up.");
+      if (window.confirm("Email not found. Do you want to sign up instead?")) {
+        navigate("/signup");
+      }
     }
   };
 

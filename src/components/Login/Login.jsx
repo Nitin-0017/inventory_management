@@ -6,9 +6,10 @@ const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
-  // On mount, check if user chose "remember me"
   useEffect(() => {
     const remembered = JSON.parse(localStorage.getItem('rememberMe'));
     if (remembered) {
@@ -20,26 +21,35 @@ const LogIn = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setEmailError('');
+    setPasswordError('');
+
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find((u) => u.email === email && u.password === password);
+    const userByEmail = users.find((u) => u.email === email);
 
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-
-      if (rememberMe) {
-        localStorage.setItem('rememberMe', JSON.stringify({ email, password }));
-      } else {
-        localStorage.removeItem('rememberMe');
-      }
-
-      navigate('/dashboard');
-    } else {
-      alert('Invalid credentials');
+    if (!userByEmail) {
+      setEmailError('Email not found. Sign up?');
+      return;
     }
+
+    if (userByEmail.password !== password) {
+      setPasswordError('Invalid password. Forgot password?');
+      return;
+    }
+
+    // Correct credentials
+    localStorage.setItem('currentUser', JSON.stringify(userByEmail));
+    if (rememberMe) {
+      localStorage.setItem('rememberMe', JSON.stringify({ email, password }));
+    } else {
+      localStorage.removeItem('rememberMe');
+    }
+
+    navigate('/dashboard');
   };
 
   const handleForgotPassword = () => {
-    navigate('/forgot'); // navigate to forgot password page
+    navigate('/forgot');
   };
 
   return (
@@ -60,11 +70,13 @@ const LogIn = () => {
             <div className="form-group">
               <label>Email</label>
               <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              {emailError && <p className="input-error">{emailError}</p>}
             </div>
 
             <div className="form-group">
               <label>Password</label>
               <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              {passwordError && <p className="input-error">{passwordError}</p>}
             </div>
 
             <div className="form-options">
