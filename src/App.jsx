@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 // Auth
 import LogIn from './components/Login/Login.jsx';
 import SignUp from './components/Signup/Signup.jsx';
+import Forgot from './components/Forget_Password/Forgot.jsx'; // new forgot password page
 
 // Dashboard & Pages
 import Dashboard from './components/Dashboard/Dashboard.jsx';
@@ -25,7 +26,8 @@ const App = () => {
     <Routes>
       {/* Auth Routes */}
       <Route path="/" element={<LogIn />} />
-      <Route path="/signUp" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/forgot" element={<Forgot />} /> {/* forgot password route */}
 
       {/* Main Pages */}
       <Route path="/dashboard" element={<Dashboard />} />

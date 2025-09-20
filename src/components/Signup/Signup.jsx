@@ -11,27 +11,33 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (!fullName || !email || !password || !confirmPassword) {
       alert('Please fill all the fields');
       return;
     }
-
+  
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-
-    const validEmail = 'admin@example.com';
-    const validPassword = '123456';
-
-    if (email === validEmail && password === validPassword) {
-      navigate('/dashboard');
-    } else {
-      alert('Invalid signup credentials');
+  
+    // Save user in localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    // Check if email already exists
+    const userExists = users.find((u) => u.email === email);
+    if (userExists) {
+      alert('User already exists');
+      return;
     }
+  
+    users.push({ fullName, email, password });
+    localStorage.setItem('users', JSON.stringify(users));
+  
+    alert('Signup successful!');
+    navigate('/'); // Redirect to login
   };
-
+  
   return (
     <div className="signup-container">
       <div className="signup-card">

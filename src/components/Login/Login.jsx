@@ -1,19 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
+  // On mount, check if user chose "remember me"
+  useEffect(() => {
+    const remembered = JSON.parse(localStorage.getItem('rememberMe'));
+    if (remembered) {
+      setEmail(remembered.email);
+      setPassword(remembered.password);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email === 'admin@gmail.com' && password === '123456') {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find((u) => u.email === email && u.password === password);
+
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      if (rememberMe) {
+        localStorage.setItem('rememberMe', JSON.stringify({ email, password }));
+      } else {
+        localStorage.removeItem('rememberMe');
+      }
+
       navigate('/dashboard');
     } else {
       alert('Invalid credentials');
     }
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgot'); // navigate to forgot password page
   };
 
   return (
@@ -43,13 +69,13 @@ const LogIn = () => {
 
             <div className="form-options">
               <label className="remember-me">
-                <input type="checkbox" />
+                <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
                 Remember me
               </label>
-              <a href="#">Forgot password?</a>
+              <a href="#" onClick={handleForgotPassword}>Forgot password?</a>
             </div>
 
-            <button type="submit" className="login-btn">Sign in</button>
+            <button type="submit" className="login-btn">Log in</button>
 
             <div className="divider">
               <div className="line"></div>
